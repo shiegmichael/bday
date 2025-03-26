@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Elada!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+         body {
+        font-family: 'Poppins', sans-serif;
+        background-image: url(https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Happy%20birthday-3RdsxiQr2A7n61GtItKTdQEdDjsgsb.jpeg); 
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        overflow: hidden;
+        color: #333;
+    }
+
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease-out;
+        }
+
+        #loading-screen h2 {
+            margin-bottom: 20px;
+            color: #ff66b2;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .loading-container {
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .loading-bar {
+            height: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .loading-progress {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #ff66b2, #ff99cc);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .loading-text {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #ff66b2;
+        }
+
+        /* Main Celebration */
+        .hidden {
+            display: none !important;
+        }
+
+        #celebration {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+
+        .birthday-container {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+
+        .birthday-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 3.5rem;
+            color: #ff66b2;
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        .birthday-name {
+            font-family: 'Pacifico', cursive;
+            font-size: 4rem;
+            color: #ff3399;
+            margin-bottom: 30px;
+            animation: colorChange 3s infinite;
+        }
+
+        .birthday-message {
+            font-size: 1.2rem;
+            margin: 30px 0;
+            line-height: 1.6;
+        }
+
+        /* Cake Styles */
+        .cake-container {
+            position: relative;
+            height: 200px;
+            margin: 40px auto;
+        }
+
+        .cake {
+            position: relative;
+            width: 180px;
+            height: 140px;
+            margin: 0 auto;
+        }
+
+        .cake-bottom {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #ff99cc;
+            border-radius: 10px;
+            box-shadow: 0 5px 0 #e680b3;
+        }
+
+        .cake-middle {
+            position: absolute;
+            bottom: 60px;
+            width: 90%;
+            height: 40px;
+            left: 5%;
+            background-color: #ffb3d9;
+            border-radius: 10px;
+            box-shadow: 0 5px 0 #e680b3;
+        }
+
+        .cake-top {
+            position: absolute;
+            bottom: 100px;
+            width: 80%;
+            height: 30px;
+            left: 10%;
+            background-color: #ffcce6;
+            border-radius: 10px;
+            box-shadow: 0 5px 0 #e680b3;
+        }
+
+        .candle {
+            position: absolute;
+            bottom: 130px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 30px;
+            background: linear-gradient(to bottom, #fff, #ffcccc);
+            border-radius: 5px;
+            z-index: 2;
+        }
+
+        .flame {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 25px;
+            background: radial-gradient(#ffff99, #ff9933);
+            border-radius: 50% 50% 20% 20%;
+            animation: flicker 0.5s infinite alternate;
+            box-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00;
+        }
+
+        .cake-stand {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 220px;
+            height: 20px;
+            background-color: #f2f2f2;
+            border-radius: 50%;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Party Hat */
+        .party-hat {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff66b2, #9966ff);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            z-index: 5;
+            display: none;
+        }
+
+        .party-hat::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background-color: #ffff00;
+            border-radius: 50%;
+        }
+
+        /* Buttons */
+        .celebration-btn {
+            background-color: #ff66b2;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin: 10px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .celebration-btn:hover {
+            background-color: #ff3399;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .celebration-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Music Control */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        #music-toggle {
+            background-color: #ff66b2;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #music-toggle:hover {
+            background-color: #ff3399;
+            transform: scale(1.1);
+        }
+
+        /* Balloons */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 40px;
+            height: 50px;
+            background-color: #ff66b2;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: float 15s linear infinite;
+        }
+
+        .balloon::before {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 30px;
+            background-color: #ccc;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff66b2;
+            opacity: 0.8;
+        }
+
+        /* Streamers */
+        .streamer {
+            position: absolute;
+            width: 5px;
+            height: 100px;
+            top: -100px;
+            transform-origin: top center;
+            animation: swing 5s ease-in-out infinite, fall 10s linear forwards;
+        }
+
+        /* Background Confetti */
+        .bg-confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes colorChange {
+            0% { color: #ff3399; }
+            33% { color: #ff66b2; }
+            66% { color: #ff99cc; }
+            100% { color: #ff3399; }
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+            100% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0) rotate(0); }
+            25% { transform: translateY(-200px) translateX(50px) rotate(5deg); }
+            50% { transform: translateY(-400px) translateX(-20px) rotate(-5deg); }
+            75% { transform: translateY(-600px) translateX(30px) rotate(5deg); }
+            100% { transform: translateY(-800px) translateX(-10px) rotate(-5deg); opacity: 0; }
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(0) rotate(0); opacity: 1; }
+            100% { transform: translateY(1000px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes swing {
+            0% { transform: rotate(5deg); }
+            50% { transform: rotate(-5deg); }
+            100% { transform: rotate(5deg); }
+        }
+
+        @keyframes fall {
+            0% { top: -100px; }
+            100% { top: 100vh; opacity: 0; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .birthday-title {
+                font-size: 2.5rem;
+            }
+            
+            .birthday-name {
+                font-size: 3rem;
+            }
+            
+            .cake {
+                width: 150px;
+                height: 120px;
+            }
+            
+            .birthday-container {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .birthday-title {
+                font-size: 2rem;
+            }
+            
+            .birthday-name {
+                font-size: 2.5rem;
+            }
+            
+            .cake {
+                width: 120px;
+                height: 100px;
+            }
+            
+            .celebration-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <h2>Preparing Elada's Birthday Surprise...</h2>
+        <div class="loading-container">
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <div class="loading-text">0%</div>
+        </div>
+    </div>
+
+    <!-- Background Confetti -->
+    <div class="bg-confetti-container"></div>
+
+    <!-- Main Celebration -->
+    <div id="celebration" class="hidden">
+        <div class="music-control">
+            <button id="music-toggle">
+                <span class="music-icon">🔊</span>
+            </button>
+        </div>
+
+        <div class="birthday-container">
+            <h1 class="birthday-title">Happy Birthday</h1>
+            <h2 class="birthday-name">Elada!</h2>
+            
+            <div class="cake-container">
+                <div class="cake">
+                    <div class="cake-top"></div>
+                    <div class="cake-middle"></div>
+                    <div class="cake-bottom"></div>
+                    <div class="candle">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="party-hat"></div>
+                </div>
+                <div class="cake-stand"></div>
+            </div>
+
+            <p class="birthday-message">Wishing you a day filled with happiness and a year filled with joy!</p>
+            
+            <button id="confetti-btn" class="celebration-btn">Make a Wish!</button>
+            <button id="balloon-btn" class="celebration-btn">Release Balloons!</button>
+            <button id="party-mode-btn" class="celebration-btn">Party Mode!</button>
+        </div>
+
+        <div class="balloons-container"></div>
+        <div id="confetti-container"></div>
+        <div id="streamers-container"></div>
+    </div>
+
+   <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" 
+    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1559652028&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+</iframe>
+<div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Garuda, Verdana, Tahoma, sans-serif; font-weight: 100;">
+    <a href="https://soundcloud.com/abyng" title="scar ☆" target="_blank" style="color: #cccccc; text-decoration: none;">scar ☆</a> · 
+    <a href="https://soundcloud.com/abyng/pink-maggit-deftones-nightcore" title="pink maggit- deftones *nightcore*" target="_blank" style="color: #cccccc; text-decoration: none;">pink maggit- deftones *nightcore*</a>
+</div>
+
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Loading screen functionality
+            const loadingScreen = document.getElementById('loading-screen');
+            const celebration = document.getElementById('celebration');
+            const loadingProgress = document.querySelector('.loading-progress');
+            const loadingText = document.querySelector('.loading-text');
+            const birthdayMusic = document.getElementById('birthday-music');
+            const musicToggle = document.getElementById('music-toggle');
+            const confettiBtn = document.getElementById('confetti-btn');
+            const balloonBtn = document.getElementById('balloon-btn');
+            const partyModeBtn = document.getElementById('party-mode-btn');
+            const balloonsContainer = document.querySelector('.balloons-container');
+            const confettiContainer = document.getElementById('confetti-container');
+            const streamersContainer = document.getElementById('streamers-container');
+            const bgConfettiContainer = document.querySelector('.bg-confetti-container');
+            
+            // Create background confetti
+            createBackgroundConfetti(100);
+            
+            // Simulate loading progress
+            let progress = 0;
+            const loadingInterval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress > 100) progress = 100;
+                
+                loadingProgress.style.width = `${progress}%`;
+                loadingText.textContent = `${Math.floor(progress)}%`;
+                
+                if (progress === 100) {
+                    clearInterval(loadingInterval);
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingScreen.classList.add('hidden');
+                            celebration.classList.remove('hidden');
+                            startCelebration();
+                        }, 500);
+                    }, 500);
+                }
+            }, 200);
+            
+            // Start celebration
+            function startCelebration() {
+                // Play music
+                birthdayMusic.volume = 0.5;
+                birthdayMusic.play().catch(error => {
+                    console.log('Auto-play prevented:', error);
+                    // We'll let the user click the music button instead
+                });
+                
+                // Add initial animations
+                createBalloons(5);
+                createStreamers(10);
+                setTimeout(() => createConfetti(50), 1000);
+            }
+            
+            // Music toggle
+            musicToggle.addEventListener('click', () => {
+                if (birthdayMusic.paused) {
+                    birthdayMusic.play();
+                    musicToggle.querySelector('.music-icon').textContent = '🔊';
+                } else {
+                    birthdayMusic.pause();
+                    musicToggle.querySelector('.music-icon').textContent = '🔇';
+                }
+            });
+            
+            // Confetti button
+            confettiBtn.addEventListener('click', () => {
+                createConfetti(150);
+                
+                // Make the cake candle flicker more intensely
+                const flame = document.querySelector('.flame');
+                flame.style.animation = 'flicker 0.2s infinite alternate';
+                
+                setTimeout(() => {
+                    flame.style.animation = 'flicker 0.5s infinite alternate';
+                }, 2000);
+            });
+            
+            // Balloon button
+            balloonBtn.addEventListener('click', () => {
+                createBalloons(15);
+            });
+            
+            // Party mode button
+            partyModeBtn.addEventListener('click', () => {
+                createConfetti(200);
+                createBalloons(20);
+                createStreamers(15);
+                
+                // Show party hat
+                document.querySelector('.party-hat').style.display = 'block';
+                
+                // Change background
+                document.body.style.animation = 'colorChange 5s infinite';
+                
+                // More intense animations
+                const birthdayTitle = document.querySelector('.birthday-title');
+                birthdayTitle.style.animation = 'bounce 1s infinite';
+                
+                // Play music if it's not already playing
+                if (birthdayMusic.paused) {
+                    birthdayMusic.play();
+                    musicToggle.querySelector('.music-icon').textContent = '🔊';
+                }
+            });
+            
+            // Create balloons function
+            function createBalloons(count) {
+                const colors = ['#ff66b2', '#ff99cc', '#ffb3d9', '#ffcce6', '#ff3399', 
+                               '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', 
+                               '#ff00ff', '#ff9900', '#9900ff'];
+                
+                for (let i = 0; i < count; i++) {
+                    const balloon = document.createElement('div');
+                    balloon.className = 'balloon';
+                    
+                    // Random position
+                    const left = Math.random() * 100;
+                    balloon.style.left = `${left}%`;
+                    
+                    // Random color
+                    const colorIndex = Math.floor(Math.random() * colors.length);
+                    balloon.style.backgroundColor = colors[colorIndex];
+                    
+                    // Random size
+                    const size = 30 + Math.random() * 30;
+                    balloon.style.width = `${size}px`;
+                    balloon.style.height = `${size * 1.2}px`;
+                    
+                    // Random animation duration
+                    const duration = 10 + Math.random() * 15;
+                    balloon.style.animation = `float ${duration}s linear infinite`;
+                    
+                    // Random delay
+                    const delay = Math.random() * 5;
+                    balloon.style.animationDelay = `${delay}s`;
+                    
+                    balloonsContainer.appendChild(balloon);
+                    
+                    // Remove balloon after animation completes
+                    setTimeout(() => {
+                        balloon.remove();
+                    }, duration * 1000 + delay * 1000);
+                }
+            }
+            
+            // Create confetti function
+            function createConfetti(count) {
+                const colors = ['#ff66b2', '#ff99cc', '#ffb3d9', '#ffcce6', '#ff3399', 
+                                '#ffff99', '#99ff99', '#99ccff', '#cc99ff',
+                                '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff',
+                                '#ff00ff', '#ff9900', '#9900ff', '#009900', '#990000'];
+                
+                for (let i = 0; i < count; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    
+                    // Random position
+                    const left = Math.random() * 100;
+                    confetti.style.left = `${left}%`;
+                    confetti.style.top = '0';
+                    
+                    // Random color
+                    const colorIndex = Math.floor(Math.random() * colors.length);
+                    confetti.style.backgroundColor = colors[colorIndex];
+                    
+                    // Random size
+                    const size = 5 + Math.random() * 15;
+                    confetti.style.width = `${size}px`;
+                    confetti.style.height = `${size}px`;
+                    
+                    // Random shape
+                    const shapes = ['', '50%', '0%', '50% 0 50% 50%'];
+                    const shapeIndex = Math.floor(Math.random() * shapes.length);
+                    confetti.style.borderRadius = shapes[shapeIndex];
+                    
+                    // Random rotation
+                    const rotation = Math.random() * 360;
+                    confetti.style.transform = `rotate(${rotation}deg)`;
+                    
+                    // Animation
+                    const duration = 3 + Math.random() * 4;
+                    confetti.style.animation = `confettiFall ${duration}s linear forwards`;
+                    
+                    confettiContainer.appendChild(confetti);
+                    
+                    // Remove confetti after animation completes
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, duration * 1000);
+                }
+            }
+            
+            // Create streamers function
+            function createStreamers(count) {
+                const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff',
+                               '#ff00ff', '#ff9900', '#9900ff', '#ff66b2', '#ff3399'];
+                
+                for (let i = 0; i < count; i++) {
+                    const streamer = document.createElement('div');
+                    streamer.className = 'streamer';
+                    
+                    // Random position
+                    const left = Math.random() * 100;
+                    streamer.style.left = `${left}%`;
+                    
+                    // Random color
+                    const colorIndex = Math.floor(Math.random() * colors.length);
+                    streamer.style.backgroundColor = colors[colorIndex];
+                    
+                    // Random length
+                    const length = 100 + Math.random() * 200;
+                    streamer.style.height = `${length}px`;
+                    
+                    // Random width
+                    const width = 3 + Math.random() * 5;
+                    streamer.style.width = `${width}px`;
+                    
+                    // Random rotation
+                    const rotation = -30 + Math.random() * 60;
+                    streamer.style.transform = `rotate(${rotation}deg)`;
+                    
+                    // Random animation duration
+                    const duration = 5 + Math.random() * 10;
+                    const fallDuration = 8 + Math.random() * 7;
+                    streamer.style.animation = `swing ${duration}s ease-in-out infinite, fall ${fallDuration}s linear forwards`;
+                    
+                    // Random delay
+                    const delay = Math.random() * 5;
+                    streamer.style.animationDelay = `0s, ${delay}s`;
+                    
+                    streamersContainer.appendChild(streamer);
+                    
+                    // Remove streamer after animation completes
+                    setTimeout(() => {
+                        streamer.remove();
+                    }, fallDuration * 1000 + delay * 1000);
+                }
+            }
+            
+            // Create background confetti
+            function createBackgroundConfetti(count) {
+                const colors = ['#ff66b2', '#ff99cc', '#ffb3d9', '#ffcce6', '#ff3399', 
+                                '#ffff99', '#99ff99', '#99ccff', '#cc99ff',
+                                '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff',
+                                '#ff00ff', '#ff9900', '#9900ff', '#009900', '#990000'];
+                
+                for (let i = 0; i < count; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    
+                    // Random position
+                    const left = Math.random() * 100;
+                    const top = Math.random() * 100;
+                    confetti.style.left = `${left}%`;
+                    confetti.style.top = `${top}%`;
+                    
+                    // Random color
+                    const colorIndex = Math.floor(Math.random() * colors.length);
+                    confetti.style.backgroundColor = colors[colorIndex];
+                    
+                    // Random size
+                    const size = 5 + Math.random() * 10;
+                    confetti.style.width = `${size}px`;
+                    confetti.style.height = `${size}px`;
+                    
+                    // Random shape
+                    const shapes = ['', '50%', '0%', '50% 0 50% 50%'];
+                    const shapeIndex = Math.floor(Math.random() * shapes.length);
+                    confetti.style.borderRadius = shapes[shapeIndex];
+                    
+                    // Random rotation
+                    const rotation = Math.random() * 360;
+                    confetti.style.transform = `rotate(${rotation}deg)`;
+                    
+                    // Fixed position
+                    confetti.style.position = 'absolute';
+                    
+                    bgConfettiContainer.appendChild(confetti);
+                }
+            }
+            
+            // Make cake interactive
+            const cake = document.querySelector('.cake');
+            cake.addEventListener('click', () => {
+                cake.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    cake.style.transform = 'scale(1)';
+                    createConfetti(20);
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
+
